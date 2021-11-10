@@ -1,0 +1,71 @@
+{% extends 'edit_user.html' %}
+{% load static %}
+
+{% block Style %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+{% endblock Style %}
+
+{% block Title %}
+    Edit your profile
+{% endblock Title %}
+
+{% block Content %}
+    <div class="container-sm my-3" style="width: 700px;">
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="bg-dark d-flex justify-content-center">
+                <h6 class="text-white m-0 p-2">Edit your profile</h6>
+            </div>
+            <div class="container-fluid border border-3 border-dark p-3">
+                <div class="d-flex justify-content-center bg-dark text-white">
+                    <h6>Change username</h6>
+                </div>
+                <div class="input-group">
+                    {{Form.Username}}
+                    <i class="bi bi-person-circle input-group-text"></i>
+                </div>
+                <div class="row my-2">
+                    <div class="col-sm-6">
+                        {% if error_password %}
+                            <div class="bg-danger d-flex justify-content-center">
+                                <h7 class="text-white">Wrong password</h7>
+                            </div>
+                        {% endif %}
+                        <div class="d-flex justify-content-center bg-dark text-white">
+                            <h6>Current password</h6>
+                        </div>
+                        <div class="input-group">
+                            {{Form.OldPassword}}
+                            <i class="bi bi-key input-group-text"></i>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="d-flex justify-content-center bg-dark text-white m-0">
+                            <h6>New password</h6>
+                        </div>
+                        <div class="input-group m-0">
+                            {{Form.NewPassword}}
+                            <i class="bi bi-key-fill input-group-text"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center bg-dark text-white">
+                    <h6>Animated picture URL</h6>
+                </div>
+                <div class="input-group">
+                    <i class="bi bi-file-earmark-play-fill input-group-text"></i>
+                    {{Form.GifPath}}
+                </div>
+               <div class="mt-2 d-flex justify-content-center">
+                   {{Form.Picture}}
+               </div>
+               <div class="submit mt-2">
+                    <input type="submit" value="Save" class="form-control btn btn-dark">
+               </div>
+            </div>
+        </form>
+    </div>
+    <button class="" style="display: none;">
+        <li><a href="http://localhost:8000/downloadFiles/">Download</a></li>
+    </button>
+{% endblock Content %}

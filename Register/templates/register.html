@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% block Title %}
+    Register
+{% endblock Title %}
+
+{% block Content %}
+    <div class="row d-flex justify-content-center my-4">
+        {% if Pages %}
+            <div class="container-sm col-6 mx-0" style="width:200px;">
+                <div class="list-group">
+                    {% for page in Pages %}
+                        {% if page.Path == Url %}
+                            <a href="http://127.0.0.1:8000/{{page.Path}}" class="list-group-item list-group-item-primary active">{{page.Name}}</a>
+                        {% else %}
+                            <a href="http://127.0.0.1:8000/{{page.Path}}" class="list-group-item list-group-item-primary">{{ page.Name }}</a>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+        <div class="container-md col-6 mx-0" style="width: 600px;">
+            <div class="d-flex justify-content-center align-items-center bg-primary text-white">
+                <h5 class="py-1 mb-0">Sign up</h5>
+            </div>
+            {% if form %}
+                <div class="p-4 border border-4 border-primary rounded-bottom">
+                    {% if error_username %}
+                        <div class="alert alert-danger">
+                            <h6>{{ error_username }}</h6>
+                        </div>
+                    {% endif %}
+                    {% if error_password %}
+                        <div class="alert alert-danger">
+                            <h6>Password should be greater than 5 characters</h6>
+                        </div>
+                    {% endif %}
+                    <form action="" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="input-group">
+                                    {{ form.Username }}
+                                    <i class="bi bi-person-circle input-group-text"></i>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="input-group">
+                                    {{ form.Lastname }}
+                                    <i class="bi bi-person-lines-fill input-group-text"></i>
+                                </div>
+                            </div>
+                            <div class="container-md mt-4">
+                                <div class="input-group">
+                                    {{ form.Password }}
+                                    <i class="bi bi-shield-lock-fill input-group-text"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="container-md col-md-6">
+                                <div class="input-group">
+                                    {{ form.Picture }}
+                                    <i class="bi bi-file-image input-group-text"></i>
+                                </div>
+                            </div>
+                            <div class="container-md col-md-6">
+                                <div class="d-grid">
+                                    <button class="btn btn-primary btn-block" type="submit">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            {% else %}
+                <div class="alert alert-success text-center">
+                    <h6>{{ success }}</h6>
+                    <h6>Try to <a href="{{ Host }}/login" class="alert-link">Login</a></h6>
+                </div>
+            {% endif %}
+    
+        </div>
+    </div>
+
+{% endblock Content %}

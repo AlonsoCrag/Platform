@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block Title %}
+    Pages
+{% endblock Title %}
+
+{% block Content %}
+    <!-- {{ block.super }} -->
+    
+    <div class="container-md" style="width: 400px">
+        <div class="container-fluid my-4">
+            <div class="list-group text-center">
+                {% for page in records %}
+                    {% if page.Path == Url %}
+                        <a href="{{ Host }}{{ page.Path }}" class="list-group-item  list-group-item-primary active">
+                            {{ page.Name }}
+                        </a>
+                    {% else %}
+                        <a href="{{ Host }}{{ page.Path }}" class="list-group-item list-group-item-primary">
+                            {{ page.Name }}
+                        </a>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    
+
+{% endblock Content %}
+
+{% block Scripts %}
+    <script src="{% static 'js/router_app.js' %}"></script>
+{% endblock Scripts %}

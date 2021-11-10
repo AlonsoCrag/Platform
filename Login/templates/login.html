@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block Title %}
+    Login
+{% endblock Title %}
+
+{% block Content %}
+    <div class="container-fluid mt-4 d-flex justify-content-center">
+        <div class="row">
+            <div class="container-md col-6 mx-2" style="width: 200px;">
+                <div class="list-group">
+                    {% for page in Pages %}
+                        {% if page.Path == Url %}
+                            <a href="http://127.0.0.1:8000/{{page.Path}}"  class="list-group-item list-group-item-primary active">{{page.Name}}</a>
+                        {% else %}
+                            <a href="http://127.0.0.1:8000/{{page.Path}}" class="list-group-item list-group-item-primary">{{page.Name}}</a>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="container-md col-6 mx-2" style="width: 400px;">
+                <div class="container-fluid text-center bg-primary text-white">
+                    <h5 class="p-1 mb-0">Login</h5>
+                </div>
+                <div class="p-4 border border-4 border-primary rounded-bottom">
+                    <form action="" method="post" enctype="multipart/form-data">
+                        {% if error_login %}
+                            <div class="container-md alert alert-danger">
+                                <h6>{{error_login}}</h6>
+                            </div>
+                        {% endif %}
+                        {% csrf_token %}
+                        <div class="input-group">
+                            {{ form.Username }}
+                            <i class="bi bi-people input-group-text"></i>
+                        </div>
+                        <div class="input-group mt-4">
+                            {{ form.Password }}
+                            <i class="bi bi-shield-lock-fill input-group-text"></i>
+                        </div>
+                        <div class="button mt-4">
+                            <button class="btn btn-primary form-control" type="submit">Login</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+{% endblock Content %}
